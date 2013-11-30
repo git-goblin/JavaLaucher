@@ -1,6 +1,11 @@
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,7 +22,8 @@ public class launcherFrame extends JFrame implements ActionListener  {
 	private static final long serialVersionUID = 1L;
 	public static void main(String[] args) 
 	{ 
-		new launcherFrame();
+		//new launcherFrame(); 
+		getFile();
 	}
 	
 	private JFrame window; 
@@ -52,7 +58,29 @@ public class launcherFrame extends JFrame implements ActionListener  {
 		window.setVisible(true);
 				
 	}
+	
+	public static String getFile() 
+	{
+	String dir = System.getProperty("user.dir"); 
+	return dir;
+	} 
+	
+	
+	public void sftpConnect() throws IOException
+	{ 
+		    URL url = new URL("ftp://peluche:password123@ftp.myserver.com/directory;type=i");
+			URLConnection con = url.openConnection();
+			BufferedInputStream in = new BufferedInputStream(con.getInputStream());
+			FileOutputStream out = new FileOutputStream(getFile());
 
+			int i = 0;
+			byte[] bytesIn = new byte[1024];
+			while ((i = in.read(bytesIn)) >= 0) {
+				out.write(bytesIn, 0, i);
+			}
+			out.close();
+			in.close();
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
