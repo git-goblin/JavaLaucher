@@ -26,6 +26,8 @@ public class launcherFrame extends JFrame implements ActionListener  {
 		getFile();
 	}
 	
+	public String FTPaddress;
+	
 	private JFrame window; 
 	private JPanel pane; 
 	private JButton btn_play;
@@ -65,10 +67,29 @@ public class launcherFrame extends JFrame implements ActionListener  {
 	return dir;
 	} 
 	
+	public static String getOS()
+	{ 
+		String OS = System.getProperty("os.name"); 
+		return OS;
+	}
 	
 	public void sftpConnect() throws IOException
 	{ 
-		    URL url = new URL("ftp://peluche:password123@ftp.myserver.com/directory;type=i");
+			switch(getOS()) 
+			{ 
+			case "Mac OS":  
+				FTPaddress = "MacLauncher";
+				break;
+			case "Windows":  
+				FTPaddress = "WindowsLauncher";
+				break;
+			case "Linux":  
+				FTPaddress = "WindowsLauncher";
+				break;	
+				
+			}
+		
+		    URL url = new URL("ftp://peluche:password123@ftp.myserver.com/"+ FTPaddress +";type=i");
 			URLConnection con = url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(con.getInputStream());
 			FileOutputStream out = new FileOutputStream(getFile());
