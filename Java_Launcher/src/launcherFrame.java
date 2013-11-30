@@ -27,7 +27,7 @@ public class launcherFrame extends JFrame implements ActionListener  {
 	private JProgressBar load_bar;
 	public launcherFrame() 
 	{ 
-		window = new JFrame("Pandashan Java Launcher (FUCK OFF WOWBEEZ!)"); //declaring components
+		window = new JFrame("Java Launcher"); //declaring components
 		pane = new JPanel();
 		btn_play = new JButton("Play");
 		lbl = new JLabel("Label Is Here!");
